@@ -1,11 +1,8 @@
-import random
+
 import discord
 from discord.ext import commands
-from discord.ext.commands import is_owner
-from discord.ext.commands import CheckFailure, has_permissions
+from discord.ext.commands import has_permissions
 import asyncio
-import json
-
 
 class Moderation(commands.Cog):
     def __init__(self, bot):
@@ -15,7 +12,11 @@ class Moderation(commands.Cog):
     async def on_ready(self):
         print("Moderation Cog is online")
 
-    @commands.command()
+    @commands.command(
+        aliases=["clear"],
+        example="a!purge 20",
+        description="Purges messages in a channel including the one you sent"
+    )
     @has_permissions(manage_messages=True)
     async def purge(self, ctx, *, amount_of_messages: int):
         if amount_of_messages == str:
@@ -31,7 +32,11 @@ class Moderation(commands.Cog):
             else:
                 await ctx.channel.purge(limit=amount_of_messages)
 
-    @commands.command()
+    @commands.command(
+        aliases=["permakick"],
+        example="a!ban <@bob the builder>",
+        description="Bans a specified player"
+    )
     @has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member, *, reason=None):
         await member.ban(reason=reason)
@@ -39,7 +44,9 @@ class Moderation(commands.Cog):
         embed = discord.Embed(title=f"{member} has been banned", description=f"The User has been banned by <@{id}>")
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(
+        description="WIP"
+    )
     @has_permissions(ban_members=True)
     async def unban(self, ctx, *, member):
         pass
@@ -60,7 +67,11 @@ class Moderation(commands.Cog):
             await ctx.send(f"You do not have Administrator permissions")
             await ctx.message.delete()
 
-    @commands.command()
+    @commands.command(
+        aliases=["banbutnotban"],
+        example="a!kick <@bob the builder>",
+        description="Kicks a member"
+    )
     @has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         await member.kick(reason=reason)
@@ -68,7 +79,10 @@ class Moderation(commands.Cog):
         embed = discord.Embed(title=f"{member} has been kicked", description=f"The User has been kicked by {id}")
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(
+        example="a!unban <@bob the builder>",
+        description="bans and unbans someone"
+    )
     @has_permissions(ban_members=True)
     async def softban(self, ctx, member: discord.Member, *, reason=None):
         await member.ban(reason=reason)
@@ -76,12 +90,20 @@ class Moderation(commands.Cog):
         await ctx.guild.unban(member)
         await ctx.send(f"{member.mention} has been banned and unbanned")
 
-    @commands.command(aliases=["nickname", "changenick"])
+    @commands.command(
+        aliases=["changenick","nickname"],
+        example="a!nick <@bob the builder> bob",
+        description="WIP"
+    )
     async def nick(self, ctx, member: discord.Member, *, nickname):
         await member.edit(nick=nickname)
         await ctx.message.delete()
 
-    @commands.command(aliases=["pm", "dm"])
+    @commands.command(
+        aliases=["pm","dm"],
+        example="a!message <member>",
+        description="messages a member"
+    )
     @has_permissions(administrator=True)
     async def message(self, ctx, member: discord.Member, *, message):
         server = ctx.message.guild.name
@@ -89,7 +111,10 @@ class Moderation(commands.Cog):
         await member.send(embed=embed)
         await ctx.message.delete()
 
-    @commands.command()
+    @commands.command(
+        example="a!embed \"bob\" he builds buildings",
+        description="Sends a title and description using embed, useful for todo lists, etc"
+    )
     @has_permissions(manage_messages=True)
     async def embed(self, ctx, title, *, description):
         embed = discord.Embed(title=title, description=description)
