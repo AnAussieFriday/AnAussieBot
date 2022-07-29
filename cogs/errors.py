@@ -32,7 +32,7 @@ class Error(commands.Cog):
         else:
             embed = discord.Embed(title="An Error Occured", description="An unknown error occured")
             await ctx.send(embed=embed)
-            #thank you to golder for letting me look into his code, (i found this)
+            #thank you to Golder06 for letting me look into his code, (i found this)
             tback = traceback.format_exception(type(error), error, error.__traceback__)
             str_tback = ""
             for line in tback:
