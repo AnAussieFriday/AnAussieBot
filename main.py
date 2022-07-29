@@ -1,15 +1,9 @@
-import random
 import discord
 from discord.ext import commands
 import os
-from discord.ext.commands import is_owner
 import asyncio
-from discord.ext.commands import CheckFailure, has_permissions
-import aiohttp
 import sys
-from urllib.parse import quote_plus
-import json
-from discord import app_commands
+import aussiehelp
 
 
 class Bot(commands.Bot):
@@ -17,7 +11,7 @@ class Bot(commands.Bot):
 
         prefix_list = ["a!", "b!", "c!"]
 
-        super().__init__(command_prefix=prefix_list, intents=intents, help_command=None)
+        super().__init__(command_prefix=prefix_list, intents=intents,help_command=aussiehelp.AnAussieHelpCommand())
 
     async def on_ready(self):
         await bot.change_presence(status=discord.Status.online,
@@ -44,20 +38,7 @@ async def main():
                 await bot.load_extension(f"cogs.utilities")
                 await bot.load_extension(f"cogs.moderation")
                 await bot.load_extension(f"cogs.fun")
-            await bot.start(TOKEN)
-
-
-@bot.command()
-@is_owner()
-async def cogs(ctx, action, cog):
-    if action == "load":
-        await bot.load_extension(f"cogs.{cog}")
-    elif action == "unload":
-        await bot.unload_extension(f"cogs.{cog}")
-    else:
-        await ctx.send("You have not specified load or unload")
-
-
-asyncio.run(main())
+                await bot.load_extension(f"cogs.hidden")
+            await bot.start("TOKEN")
 
 
