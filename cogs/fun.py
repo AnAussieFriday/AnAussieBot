@@ -14,12 +14,10 @@ class Fun(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, ctx):
-        if ctx.author.bot: 
-           pass
-        else:
-           msg = ctx.content.lower().split()
-           if 'neat' in msg:
-               await ctx.reply("Neat is a mod by Vaskii")
+        if ctx.author.bot: return
+        msg = ctx.content.lower().split()
+        if 'neat' in msg:
+            await ctx.reply("Neat is a mod by Vaskii")
 
 
     @commands.command(
