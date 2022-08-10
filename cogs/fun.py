@@ -24,7 +24,6 @@ class Fun(commands.Cog):
         aliases=["destroy"],
         example="a!kill bob the builder",
         description="Sends random kill message of someone",
-        name="a!kill"
     )
     async def kill(self, ctx, *, victim):
         death_messages = [f'{victim} was stabbed',
