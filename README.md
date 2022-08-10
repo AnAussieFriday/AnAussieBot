@@ -7,4 +7,4 @@ The AussieBot was a bot originally there to measure the amount of days have gone
 - [x] Make a Modrinth Command
 - [ ] ~~apparently fix the nick command(?)~~
 - [ ] Fix my unban command
-- [ ] Fix cogs not being recognised and being manually put in
+- [x] Fix cogs not being recognised and being manually put in
