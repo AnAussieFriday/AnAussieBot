@@ -34,11 +34,10 @@ async def main():
         for filename in os.listdir("./cogs"):
             if filename.endswith(".py"):
                 await bot.load_extension(f"cogs.{filename[:-3]}")
-                #for some reason it only loads the first file and not the other :pensive:
-                await bot.load_extension(f"cogs.utilities")
-                await bot.load_extension(f"cogs.moderation")
-                await bot.load_extension(f"cogs.fun")
-                await bot.load_extension(f"cogs.hidden")
-            await bot.start("TOKEN")
+        await bot.start(BEST_TOKEN_IN_THE_WORLD)
+        #finally fixed the problem here
+
+
+asyncio.run(main())
 
 
