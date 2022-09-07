@@ -1,8 +1,8 @@
-
 import discord
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 import asyncio
+
 
 class Moderation(commands.Cog):
     def __init__(self, bot):
@@ -18,19 +18,14 @@ class Moderation(commands.Cog):
         description="Purges messages in a channel including the one you sent"
     )
     @has_permissions(manage_messages=True)
-    async def purge(self, ctx, *, amount_of_messages: int):
-        if amount_of_messages == str:
+    async def purge(self, ctx, *, amount_of_messages):
+        if int(amount_of_messages) >= 200:
             embed = discord.Embed(title=f"An error has occured",
-                                 description=f"The value `amount_of_messages` cannot be a string or letter, must be a number below 200")
+                                  description=f"You have specified a number of messages to "
+                                              f"delete higher than the amount allowed (200 or less is allowed)")
             await ctx.send(embed=embed)
         else:
-            if amount_of_messages >= 200:
-                #this has happened before do not question it
-                embed = discord.Embed(title=f"An error has occured",
-                                      description=f"You have specified a number of messages to delete higher than the amount allowed (200 or less is allowed)")
-                await ctx.send(embed=embed)
-            else:
-                await ctx.channel.purge(limit=amount_of_messages)
+            await ctx.channel.purge(limit=1 + int(amount_of_messages))
 
     @commands.command(
         aliases=["permakick"],
@@ -40,11 +35,12 @@ class Moderation(commands.Cog):
     @has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member, *, reason=None):
         await member.ban(reason=reason)
-        id = ctx.author.id
-        embed = discord.Embed(title=f"{member} has been banned", description=f"The User has been banned by <@{id}>")
+        author_id = ctx.author.id
+        embed = discord.Embed(title=f"{member} has been banned",
+                              description=f"The User has been banned by <@{author_id}>")
         await ctx.send(embed=embed)
 
-    @commands.command(
+    '''@commands.command(
         description="WIP"
     )
     @has_permissions(ban_members=True)
@@ -53,7 +49,6 @@ class Moderation(commands.Cog):
         #doesn't work, too lazy to debug
         banned_users = await ctx.guild.bans()
         member_name, member_discriminator = member.split("#")
-
         for ban_entry in banned_users:
             user = ban_entry.user
             if (user.name, user.discriminator) == (member_name, member_discriminator):
@@ -65,18 +60,17 @@ class Moderation(commands.Cog):
                 return
         else:
             await ctx.send(f"You do not have Administrator permissions")
-            await ctx.message.delete()
+            await ctx.message.delete()'''
 
     @commands.command(
-        aliases=["banbutnotban"],
         example="a!kick <@bob the builder>",
         description="Kicks a member"
     )
     @has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         await member.kick(reason=reason)
-        id = ctx.authod
-        embed = discord.Embed(title=f"{member} has been kicked", description=f"The User has been kicked by {id}")
+        author_id = ctx.author
+        embed = discord.Embed(title=f"{member} has been kicked", description=f"The User has been kicked by {author_id}")
         await ctx.send(embed=embed)
 
     @commands.command(
@@ -91,16 +85,15 @@ class Moderation(commands.Cog):
         await ctx.send(f"{member.mention} has been banned and unbanned")
 
     @commands.command(
-        aliases=["changenick","nickname"],
-        example="a!nick <@bob the builder> bob",
-        description="WIP"
+        aliases=["changenick", "nickname"],
+        example="a!nick <@bob the builder> bob"
     )
     async def nick(self, ctx, member: discord.Member, *, nickname):
         await member.edit(nick=nickname)
         await ctx.message.delete()
 
     @commands.command(
-        aliases=["pm","dm"],
+        aliases=["pm", "dm"],
         example="a!message <member>",
         description="messages a member"
     )
