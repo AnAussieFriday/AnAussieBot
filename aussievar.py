@@ -249,4 +249,106 @@ galacticlangtranslate1 = {
     " ": " "
 }
 
-galazy = galacticlangtranslate1.keys
+power_active_keys = [
+    "aussiefriday:master_of_climbing",
+    "origins:launch_into_air",
+    "origins:throw_ender_pearl",
+    "origins:water_vision",
+    "aussiefriday:phantom"
+]
+
+
+hidden_powers = [
+    "origins:arthropod",
+    "origins:lay_eggs",
+    "origins:flame_particles",
+    "origins:damage_from_snowballs",
+    "origins:damage_from_potions",
+    "origins:ender_particles",
+    "origins:aquatic",
+    "origins:conduit_power_on_land",
+    "origins:air_from_potions",
+    "origins:translucent"
+]
+
+debuff = [
+    "origins:fragile",
+    "origins:carnivore",
+    "origins:fresh_air",
+    "origins:vegetarian",
+    "origins:nether_spawn",
+    "origins:water_vulnerability",
+    "origins:light_armor",
+    "origins:claustrophobia",
+    "origins:more_kinetic_damage",
+    "origins:pumpkin_hate",
+    "origins:nine_lives",
+    "origins:weak_arms",
+    "origins:water_breathing",
+    "origins:burn_in_daylight",
+    "origins:no_shield",
+    "origins:no_shield",
+    "origins:no_shield",
+    "origins:no_shield",
+    "origins:no_shield",
+    "origins:more_exhaustion"
+]
+
+buff = [
+    "origins:slow_falling",
+    "origins:like_air",
+    "origins:tailwind",
+    "origins:fire_immunity",
+    "origins:burning_wrath",
+    "origins:hotblooded",
+    "origins:winged",
+    "origins:aerial_combatant",
+    "origins:extra_reach",
+    "origins:fall_immunity",
+    "origins:sprint_jump",
+    "origins:velvet_paws",
+    "origins:scare_creepers",
+    "origins:cat_vision",
+    "origins:water_vision",
+    "origins:aqua_affinity",
+    "origins:swim_speed",
+    "origins:like_water",
+    "origins:natural_armor",
+    "origins:strong_arms_break_speed"
+]
+
+icon = [
+    "minecraft:cobweb",
+    "minecraft:feather",
+    "minecraft:blaze_powder",
+    "minecraft:elytra",
+    "minecraft:ender_pearl",
+    "minecraft:orange_wool",
+    "minecraft:cod",
+    "minecraft:phantom_membrane",
+    "minecraft:shulk"
+]
+
+name = [
+    "Arachnid",
+    "Avian",
+    "Blazeborn",
+    "Elytrian",
+    "Enderian",
+    "Feline",
+    "Merling",
+    "Phantom",
+    "Shulk"
+]
+
+description = [
+    "Their climbing abilities and the ability to trap their foes in spiderweb make the Arachnid perfect hunters.",
+    "The Avian race has lost their ability to fly a long time ago. Now these peaceful creatures can be seen gliding from one place to another.",
+    "Late descendants of the Blaze, the Blazeborn are naturally immune to the perils of the Nether."
+    "Often flying around in the winds, Elytrians are uncomfortable when they don't have enough space above their head.",
+    "Born as sons and daughters of the Ender Dragon, Enderians are capable of teleporting but are vulnerable to water.",
+    "With their cat-like appearance, the Feline scare creepers away. With the dexterity of cats, they always land safely on their feet.",
+    "These natural inhabitants of the ocean are not used to being out of the water for too long.",
+    "As half-human and half-phantom offspring, these creatures can switch between a Phantom and a normal form.",
+    "Related to Shulkers, the bodies of the Shulk are outfitted with a protective shell-like skin."
+]
