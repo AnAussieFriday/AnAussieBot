@@ -1,3 +1,7 @@
-git+https://github.com/Rapptz/discord.py
 requests==2.28
 aiohttp==3.8.1
+PIL
+validators
+googletrans
+discord
+pyjokes
