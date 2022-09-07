@@ -2,16 +2,14 @@ import discord
 from discord.ext import commands
 import os
 import asyncio
-import sys
-import aussiehelp
 
 
-class Bot(commands.Bot):
+class AnAussieBot(commands.Bot):
     def __init__(self, *, intents: discord.Intents):
 
         prefix_list = ["a!", "b!", "c!"]
 
-        super().__init__(command_prefix=prefix_list, intents=intents,help_command=aussiehelp.AnAussieHelpCommand())
+        super().__init__(command_prefix=prefix_list, intents=intents)
 
     async def on_ready(self):
         await bot.change_presence(status=discord.Status.online,
@@ -23,10 +21,7 @@ class Bot(commands.Bot):
 intents = discord.Intents.default()
 intents.message_content = True
 
-bot = Bot(intents=intents)
-
-
-print(sys.version)
+bot = AnAussieBot(intents=intents)
 
 
 async def main():
@@ -34,10 +29,7 @@ async def main():
         for filename in os.listdir("./cogs"):
             if filename.endswith(".py"):
                 await bot.load_extension(f"cogs.{filename[:-3]}")
-        await bot.start(BEST_TOKEN_IN_THE_WORLD)
-        #finally fixed the problem here
+        await bot.start("i simp bob the builder")
 
 
 asyncio.run(main())
-
-
