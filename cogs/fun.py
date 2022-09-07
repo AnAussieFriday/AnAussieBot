@@ -2,6 +2,8 @@ import random
 import discord
 from discord.ext import commands
 import aiohttp
+import pyjokes
+
 
 class Fun(commands.Cog):
     def __init__(self, bot):
@@ -11,14 +13,19 @@ class Fun(commands.Cog):
     async def on_ready(self):
         print("Fun cog is online")
 
-
     @commands.Cog.listener()
     async def on_message(self, ctx):
         if ctx.author.bot: return
-        msg = ctx.content.lower().split()
-        if 'neat' in msg:
-            await ctx.reply("Neat is a mod by Vaskii")
+        if 'neat' in ctx.content:
+            await ctx.reply("Neat is a mod by Vazkii")
+        if 'hello there' in ctx.content:
+            await ctx.reply("General Kenobi")
 
+    @commands.command(
+        description="Tells a joke (Really?)"
+    )
+    async def joke(self, ctx):
+        await ctx.send(pyjokes.get_joke())
 
     @commands.command(
         aliases=["destroy"],
@@ -48,7 +55,6 @@ class Fun(commands.Cog):
                 embed.set_image(url=res['data']['children'][random.randint(0, 25)]['data']['url'])
                 await ctx.send(embed=embed)
 
-
     @commands.command()
     async def dayswithoutbitches(self, ctx):
         await ctx.send('Days gone without the word "bitches" being said: **' + str(0) + '**')
@@ -57,7 +63,8 @@ class Fun(commands.Cog):
     async def walterwhite(self, ctx):
         await ctx.send('https://cdn.discordapp.com/attachments/955314816166277152/966701687207248003/walter.mp4')
 
-    @commands.command(aliases=['wisdom'],name="8ball",description="Ask the 8ball a question, it will deliver an answer most of the time i think")
+    @commands.command(aliases=['wisdom'], name="8ball",
+                      description="Ask the 8ball a question, it will deliver an answer most of the time i think")
     async def _8ball(self, ctx, *, question):
         responses = ['It is certain.',
                      'It is decidedly so.',
@@ -87,7 +94,7 @@ class Fun(commands.Cog):
             await ctx.send(embed=embed)
 
     @commands.command(
-        aliases=["relationship","relation_ship"],
+        aliases=["relationship", "relation_ship"],
         example="a!ship urmom urdad",
         description="Ships 2 people together"
     )
@@ -117,9 +124,8 @@ class Fun(commands.Cog):
             number_dice_answer_2 = random.randint(1, roll_number)
             await ctx.send(f"Out of **{str(roll_number)}**, You got **{number_dice_answer_2}**")
 
-
     @commands.command(
-        aliases=["burn","insult"],
+        aliases=["burn", "insult"],
         example="a!roast Bob the Builder",
         description="Roasts someone of your input"
     )
@@ -142,9 +148,8 @@ class Fun(commands.Cog):
                           ]
         await ctx.send(f'{random.choice(death_messages)}')
 
-
     @commands.command(
-        aliases=["choice","pick"],
+        aliases=["choice", "pick"],
         example="a!choose bob builder build buildings",
         description="Chooses one of many input you give it"
     )
@@ -158,8 +163,8 @@ class Fun(commands.Cog):
     )
     async def meme(self, ctx):
         reddits = ['https://www.reddit.com/r/dankmemes/new.json?sort=hot',
-                           'https://www.reddit.com/r/memes/new.json?sort=hot',
-                           'https://www.reddit.com/r/me_irl/new.json?sort=hot']
+                   'https://www.reddit.com/r/memes/new.json?sort=hot',
+                   'https://www.reddit.com/r/me_irl/new.json?sort=hot']
         async with aiohttp.ClientSession() as cs:
             async with cs.get(random.choice(reddits)) as r:
                 res = await r.json()
@@ -192,7 +197,8 @@ class Fun(commands.Cog):
             "https://cdn.discordapp.com/attachments/914233052828409857/994691921572266034/88qcjk8syvr81.mp4",
             "https://cdn.discordapp.com/attachments/914233052828409857/994691794656841940/6b8wup.gif",
             "https://cdn.discordapp.com/attachments/914233052828409857/994691730714677349/Untitled.mp4",
-            "https://cdn.discordapp.com/attachments/914233052828409857/994691615077711954/trim.5B61D550-62CB-4AC8-B067-41358BBC6A0C.mov",
+            "https://cdn.discordapp.com/attachments/914233052828409857/994691615077711954/trim.5B61D550-62CB-"
+            "4AC8-B067-41358BBC6A0C.mov",
             "https://cdn.discordapp.com/attachments/914233052828409857/994691545674559538/happiness.mp4",
             "https://cdn.discordapp.com/attachments/914233052828409857/994691456256192696/5fa5f69ceee792b4.mp4",
             "https://cdn.discordapp.com/attachments/914233052828409857/994691421934190713/cockey_cola.mp4",
@@ -215,37 +221,15 @@ class Fun(commands.Cog):
             "https://cdn.discordapp.com/attachments/914233052828409857/994690107598704801/unknown.png",
             "https://cdn.discordapp.com/attachments/914233052828409857/994690107275751464/unknown.png"
         ]
-        #ty to merpous for sending me this images and videos
+        # ty to merpous for sending me this images and videos
         await ctx.send(f'{random.choice(cat_moment)}')
 
+    @commands.command()
+    async def yawn(self, ctx):
+        await ctx.send(
+            "Good morn/noon/night my fri"
+            "ends and foes, and remember, be unwieldy, drink milk! <:emoji_wave:1008322633856729129>")
 
-    #code doesn't work, disabled it for now
-
-    #@commands.Cog.listener()
-    #async def on_message_delete(self, message):
-    #    self.bot.sniped_messages[message.guild.id] = (message.content, message.author, message.channel, message.created_at)
-
-    #@commands.Cog.listener()
-    #async def on_message_edit(self, before, after):
-    #    self.bot.edited_messages = (before.content, after.content, after.author, after.author.avatar.url)
-
-    #new = None
-
-    #@commands.command()
-    #async def snipe(self, ctx):
-    #    content, user, channel, time = self.bot.sniped_messages[ctx.guild.id]
-    #    edit_content_before, edit_content_after, edit_author, edit_author_avatar = self.bot.edited_messages
-    #    new = None
-    #    if new == None:
-    #        embed = discord.Embed(description=f"**Before:** {edit_content_before}\n**After:** {edit_content_after}")
-    #        embed.set_author(name=f"{edit_author}", icon_url=edit_author_avatar)
-    #        await ctx.send(embed=embed)
-    #        embed = discord.Embed(description=content, timestamp=time)
-    #        embed.set_author(name=f"{user}", icon_url=user.avatar.url)
-    #        embed.set_footer(text=f"Deleted in: #{channel}")
-    #        await ctx.send(embed=embed)
-    #    else:
-    #        await ctx.send("Secret message kek")
 
 async def setup(bot):
     await bot.add_cog(Fun(bot))
